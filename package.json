@@ -1,0 +1,26 @@
+{
+  "name": "exasharp",
+  "version": "0.0.0",
+  "description": "An ERP web hosting SAAS application.",
+  "keywords": [
+    "ERP"
+  ],
+  "homepage": "https://github.com/fullstackDev0404/EXASHARP#readme",
+  "bugs": {
+    "url": "https://github.com/fullstackDev0404/EXASHARP/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fullstackDev0404/EXASHARP.git"
+  },
+  "license": "ISC",
+  "author": "Joana kelly & Sadik Ahsan",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "npm install --prefix backend && npm install --prefix frontend",
+    "server": "npm start --prefix backend",
+    "client": "npm start --prefix frontend",
+    "dev": "npm run server & npm run client"
+  }
+}
