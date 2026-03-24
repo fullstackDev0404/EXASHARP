@@ -1,0 +1,30 @@
+# Node modules
+node_modules/
+
+# Log files
+*.log
+npm-debug.log*
+
+# Environment variables file
+.env
+
+# Dependency directories
+bower_components/
+jspm_packages/
+
+# Build output
+/dist
+/build
+
+# VSCode settings (if you're using VSCode)
+.vscode/
+
+# MacOS Finder files
+.DS_Store
+
+# Windows files
+Thumbs.db
+
+# npm package-lock or yarn.lock
+package-lock.json
+yarn.lock
