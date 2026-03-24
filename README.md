@@ -23,3 +23,41 @@ Exasharp is a modern, modular, and lightweight Enterprise Resource Planning (ERP
 - **Frontend:** React / Tailwind CSS
 - **Database:** PostgreSQL
 
+---
+
+## ▶️ Run the Project
+
+Install dependencies first:
+
+```bash
+npm run install-all
+```
+
+Run from project root (`EXASHARP_new`):
+
+```bash
+# Run backend (nodemon) + frontend (vite)
+npm run dev
+
+# Run backend only (nodemon)
+npm start
+```
+
+Run backend only from `server` folder:
+
+```bash
+npm install
+npm run dev
+# or
+npm start
+```
+
+Run frontend only from `client` folder:
+
+```bash
+npm install
+npm run dev
+# or
+npm start
+```
+
