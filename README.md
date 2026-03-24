@@ -23,4 +23,3 @@ Exharp is a modern, modular, and lightweight Enterprise Resource Planning (ERP) 
 - **Frontend:** React / Tailwind CSS
 - **Database:** PostgreSQL
 
----
