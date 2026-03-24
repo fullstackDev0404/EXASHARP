@@ -3,7 +3,7 @@
 Exasharp is a modern, modular, and lightweight Enterprise Resource Planning (ERP) solution designed to streamline business operations without the complexity of legacy systems.
 
 > [!WARNING]  
-> **Status: Work in Progress.** Exharp is currently in the active development phase. Features are being added daily, and the API/Database schema is subject to change.
+> **Status: Work in Progress.** Exasharp is currently in the active development phase. Features are being added daily, and the API/Database schema is subject to change.
 
 ---
 
