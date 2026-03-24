@@ -9,7 +9,7 @@ function App() {
     fetch('http://localhost:3000/api/data')
       .then(response => response.json())
       .then(data => setServerData(data.message))
-      .catch(err => setServerData("Failed to connect to backend"));
+      .catch(_err => setServerData("Failed to connect to backend"));
   }, []);
 
   return (
