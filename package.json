@@ -1,11 +1,11 @@
 {
-  "name": "exasharp",
+  "name": "experimental",
   "version": "0.0.0",
   "description": "An ERP web hosting SAAS application.",
-  "keywords": [
+    "keywords": [
     "ERP"
   ],
-  "homepage": "https://github.com/fullstackDev0404/EXASHARP#readme",
+   "homepage": "https://github.com/fullstackDev0404/EXASHARP#readme",
   "bugs": {
     "url": "https://github.com/fullstackDev0404/EXASHARP/issues"
   },
@@ -15,18 +15,31 @@
   },
   "license": "ISC",
   "author": "Joana kelly & Sadik Ahsan",
-  "type": "commonjs",
-  "main": "index.js",
-  "scripts": {
-    "install-all": "npm install --prefix server && npm install --prefix client",
-    "server": "nodemon server/app.js",
-    "client": "npm run dev --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "npm run install-all && npm run build --prefix client",
-    "start": "nodemon server/app.js"
-  },
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "devDependencies": {
-    "concurrently": "^9.2.1",
-    "nodemon": "^3.1.14"
+    "@types/bun": "^1.3.11",
+    "turbo": "^2.8.20"
+  },
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check": "turbo check",
+    "lint": "turbo lint",
+    "clean": "turbo clean",
+    "clean:all": "turbo clean && rm -rf node_modules bun.lock",
+    "format": "prettier --write \"**/*.{ts,js,svelte,json,md}\"",
+    "install:all": "bun install",
+    "update:all": "bun update --latest"
+  },
+  "peerDependencies": {
+    "typescript": "^6.0.2"
+  },
+  "packageManager": "bun@1.0.0",
+  "dependencies": {
+    "prettier": "^3.8.1"
   }
 }
