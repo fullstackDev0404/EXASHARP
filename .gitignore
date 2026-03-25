@@ -1,24 +1,60 @@
-# Logs
-logs
+# Bun & Dependencies
+node_modules/
+bun.lockb
+# If you are strictly using Bun, you can ignore these NPM/Yarn files:
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# SvelteKit & Frontend (Vite)
+.svelte-kit/
+/build/
+/out/
+/dist/
+.vercel/
+.netlify/
+.wrangler/
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Elysia & Backend
+# (Elysia usually outputs to dist/ or build/, covered above)
+# Add any specific binary outputs if you compile with 'bun build --compile'
+*.exe
+*.o
+
+# Environment & Secrets (CRITICAL)
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+# Allow the example file so team members know what variables to set
+!.env.example
+
+# Logs & Debugging
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+**/*.trace
+/coverage/
+*.lcov
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
+# Editor & System
+.idea/
+.vscode/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+.DS_Store
+Thumbs.db
+.eslintcache
+.cache
+*.tsbuildinfo
+
+# Compatibility
+.turbo/
