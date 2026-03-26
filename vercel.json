@@ -19,7 +19,13 @@
     },
     {
       "src": "/api/(.*)",
-      "dest": "/server/$1"
+      "dest": "/server/index.ts"
     }
-  ]
+  ],
+  "functions": {
+    "server/index.ts": {
+      "memory": 512,
+      "maxDuration": 10
+    }
+  }
 }
