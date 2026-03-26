@@ -1,31 +1,10 @@
 {
-  "builds": [
-    {
-      "src": "client/package.json",
-      "use": "@vercel/node",
-      "config": {
-        "maxLambdaSize": "50mb"
-      }
-    },
-    {
-      "src": "server/index.ts",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/client/.svelte-kit/output/$1"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/server/index.ts"
-    }
-  ],
-  "functions": {
-    "server/index.ts": {
-      "memory": 512,
-      "maxDuration": 10
-    }
-  }
+  "version": 2,
+  "installCommand": "bun install",
+  "buildCommand": "bun run build",
+  "outputDirectory": "client/dist",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/server/app.js" }, 
+    { "source": "/(.*)", "destination": "/client/dist/$1" }  
+  ]
 }

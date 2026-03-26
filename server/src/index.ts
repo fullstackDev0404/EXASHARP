@@ -1,7 +1,7 @@
 import { Elysia, status, t } from 'elysia'
 import { openapi } from '@elysiajs/openapi'
 import { cors } from '@elysiajs/cors'
-import { db } from '../db';
+import { db } from './db';
 
 const app = new Elysia()
   .use(openapi()) // Elysia OpenAPI plugin (optional, but highly recommended for API documentation)
