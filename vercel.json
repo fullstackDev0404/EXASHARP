@@ -1,3 +1,25 @@
 {
-  "rootDirectory": "client"
+  "builds": [
+    {
+      "src": "client/package.json",
+      "use": "@vercel/svelte",
+      "config": {
+        "outputDirectory": "client/.svelte-kit/output"
+      }
+    },
+    {
+      "src": "server/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/client/.svelte-kit/output/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/server/$1"
+    }
+  ]
 }
