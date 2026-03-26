@@ -4,15 +4,25 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts",
-    "clean": "rm -rf dist node_modules bun.lock"
+    "clean": "rm -rf dist node_modules bun.lock",
+    "db:generate": "drizzle-kit generate --config drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config drizzle.config.ts",
+    "db:push": "drizzle-kit push --config drizzle.config.ts",
+    "db:rollback": "drizzle-kit rollback --config drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config drizzle.config.ts"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.4.1",
     "@elysiajs/openapi": "^1.4.14",
-    "elysia": "latest"
+    "@neondatabase/serverless": "^1.0.2",
+    "drizzle-orm": "^0.45.1",
+    "elysia": "latest",
+    "pg": "^8.20.0"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@types/pg": "^8.20.0",
+    "bun-types": "latest",
+    "drizzle-kit": "^0.31.10"
   },
   "module": "src/index.js"
 }

@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@elysiajs/eden": "^1.4.8",
-    "@iconify/svelte": "^5.2.1"
+    "@iconify/svelte": "^5.2.1",
+    "@sveltejs/adapter-vercel": "^6.3.3"
   }
 }
