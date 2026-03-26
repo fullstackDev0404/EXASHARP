@@ -1,5 +1,5 @@
 import { treaty } from '@elysiajs/eden';
-import type { App } from '../../../server/src/index';
+import type { App } from '../../../server/src/api/index';
 import type { PageServerLoad } from './$types';
 
 const api = treaty<App>('http://localhost:3000');
