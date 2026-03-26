@@ -1,4 +1,4 @@
-# Experimental
+# EXASHARP ERP (Experimental)
 
 To install dependencies:
 
