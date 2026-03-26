@@ -17,7 +17,7 @@
     },
     "client": {
       "name": "client",
-      "version": "0.0.1",
+      "version": "0.0.0",
       "dependencies": {
         "@elysiajs/eden": "^1.4.8",
         "@iconify/svelte": "^5.2.1",
@@ -37,7 +37,7 @@
     },
     "server": {
       "name": "server",
-      "version": "1.0.50",
+      "version": "0.0.0",
       "dependencies": {
         "@elysiajs/cors": "^1.4.1",
         "@elysiajs/openapi": "^1.4.14",
