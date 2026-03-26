@@ -5,6 +5,6 @@ export default defineConfig({
   out: './drizzle',             // Folder for migrations
   dialect: 'postgresql',            // 'sqlite' | 'mysql' | 'postgresql'
   dbCredentials: {
-    url: 'postgresql://neondb_owner:npg_Pv1debUis4LM@ep-soft-union-am50ejnv-pooler.c-5.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',           // Path to your DB file
+    url: process.env.DATABASE_URL!,           // Path to your DB file
   },
 });
