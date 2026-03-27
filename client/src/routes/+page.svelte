@@ -14,7 +14,7 @@
 <div class="flex items-center justify-center flex-col py-25">
     <div class="pb-4 flex items-center gap-2 text-sm font-medium leading-6 text-center text-primary">
         <div class="h-2 w-2 bg-red-400 rounded-full"></div>
-        This ERP system is under development and not yet production-ready.
+        {data.backendMessage}
     </div>
     <h1 class="scroll-m-20 text-4xl font-semibold tracking-tight lg:text-5xl">
         The Foundation for your ERP System
@@ -24,7 +24,7 @@
     </p>
     <div class="pt-6">
         <Button size="lg">Get Started</Button>
-        <Button onclick={() => alert(data.backendMessage)} size="lg" variant="outline" class="ml-4">View Documentation</Button>
+        <Button size="lg" variant="outline" class="ml-4">View Documentation</Button>
     </div>
 </div>
 
