@@ -15,6 +15,7 @@ BETTER_AUTH_URL=http://localhost:3000
 All endpoints are prefixed with `/api/auth/`
 
 ### Sign Up
+
 ```bash
 POST /api/auth/sign-up
 Content-Type: application/json
@@ -27,6 +28,7 @@ Content-Type: application/json
 ```
 
 ### Sign In
+
 ```bash
 POST /api/auth/sign-in/email
 Content-Type: application/json
@@ -38,6 +40,7 @@ Content-Type: application/json
 ```
 
 ### Get Current User Session
+
 ```bash
 GET /api/me
 
@@ -56,11 +59,13 @@ Response (if authenticated):
 ```
 
 ### Sign Out
+
 ```bash
 POST /api/auth/sign-out
 ```
 
 ### List Sessions
+
 ```bash
 GET /api/auth/list-sessions
 ```
@@ -70,33 +75,33 @@ GET /api/auth/list-sessions
 ```javascript
 // Sign up
 const signUp = async (email, password, name) => {
-  const res = await fetch('/api/auth/sign-up', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password, name })
+  const res = await fetch("/api/auth/sign-up", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password, name }),
   });
   return res.json();
 };
 
 // Sign in
 const signIn = async (email, password) => {
-  const res = await fetch('/api/auth/sign-in/email', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
+  const res = await fetch("/api/auth/sign-in/email", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
   });
   return res.json();
 };
 
 // Get current user
 const getCurrentUser = async () => {
-  const res = await fetch('/api/me');
+  const res = await fetch("/api/me");
   return res.json();
 };
 
 // Sign out
 const signOut = async () => {
-  await fetch('/api/auth/sign-out', { method: 'POST' });
+  await fetch("/api/auth/sign-out", { method: "POST" });
 };
 ```
 
