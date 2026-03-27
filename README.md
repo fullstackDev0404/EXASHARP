@@ -1,11 +1,11 @@
 <div align="center">
-  <img src="./assets/favicon.svg" alt="Exasharp Logo" width="80">
+  <img src="./assets/favicon.svg" alt="Exasharp Logo" width="90">
   
   # Exasharp ERP
-  ### *Enterprise Resource Planning Made Simple*
-  
-  <img src="./assets/SS-27-03-2026.png" alt="Exasharp ERP Dashboard" width="700">
-  
+  ### *Enterprise Resource Planning, Simplified*
+
+  <img src="./assets/SS-27-03-2026.png" alt="Exasharp ERP Dashboard" width="720">
+
   [![Status](https://img.shields.io/badge/status-development-yellow.svg)]()
   [![Bun](https://img.shields.io/badge/bun-1.0+-black.svg)]()
   [![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
@@ -13,44 +13,44 @@
 
 ---
 
-## 🚀 About The Project
+## 🚀 About Exasharp
 
-Exasharp ERP is a modern enterprise resource planning solution currently in **active development**. Built with performance and scalability in mind, it aims to streamline business operations through an intuitive interface.
+Exasharp ERP is a modern, lightning-fast Enterprise Resource Planning system built for performance and simplicity.
 
-> ⚠️ **Development Status:** Not for production use. APIs and features are subject to change.
+> ⚠️ **Currently in active development** — Not ready for production.
 
 ---
 
-## ✨ Features (In Progress)
+## ✨ Key Features
 
-| Module | Description |
-|--------|-------------|
-| 📊 **Dashboard** | Real-time business analytics |
-| 👥 **User Management** | Role-based access control |
-| 📦 **Inventory** | Stock tracking and management |
-| 💰 **Finance** | Invoicing and expense tracking |
-| 📈 **Reports** | Customizable reporting tools |
+| Module          | Description                          |
+|----------------|--------------------------------------|
+| 📊 **Dashboard**    | Real-time analytics & insights      |
+| 👥 **User Management** | Role-based access control         |
+| 📦 **Inventory**    | Advanced stock tracking             |
+| 💰 **Finance**      | Invoicing, payments & expenses      |
+| 📈 **Reports**      | Powerful customizable reports       |
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Runtime:** [Bun](https://bun.sh) - Fast JavaScript runtime
-- **Frontend:** React with TypeScript
-- **Backend:** Node.js / Express
+- **Runtime:** [Bun](https://bun.sh) — Blazing fast
+- **Frontend:** SvelteKit + TypeScript
+- **Backend:** ElysiaJS
 - **Database:** PostgreSQL
 
 ---
 
-## 🏃‍♂️ Getting Started
+## 🏃‍♂️ Quick Start
 
 ### Prerequisites
-- [Bun](https://bun.sh) installed on your system
+- [Bun](https://bun.sh) installed
 
-### Installation & Running
+### Installation
 
 ```bash
-# Install all dependencies
+# Install dependencies
 bun install:all
 
 # Start development server
