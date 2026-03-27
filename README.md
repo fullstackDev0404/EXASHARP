@@ -6,10 +6,9 @@
 
 > ### **Note**
 > **Currently in active development and not ready for production.** <br>
-> 
+> lightning-fast enterprise resource planning — simple by design.
 
-
-Exasharp ERP is a modern, lightning-fast Enterprise Resource Planning system built for performance and simplicity.
+Exasharp ERP delivers a streamlined approach to business management, combining enterprise-grade functionality with a clean, intuitive interface. Designed for small to medium-sized businesses, it offers essential ERP capabilities without the bloat and complexity of traditional systems.
 
 ![hero](./assets/SS-27-03-2026.png)
 
