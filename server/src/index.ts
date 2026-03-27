@@ -16,12 +16,10 @@ const app = new Elysia()
 
   .decorate("db", db)
   .decorate("auth", auth)
-  .get("/", () => "This ERP system is under development and not yet production-ready.")
-  .post("/api/auth/sign-up/email", (ctx) => auth.handler(ctx.request))
-  .post("/api/auth/sign-in/email", (ctx) => auth.handler(ctx.request))
-  .post("/api/auth/sign-out", (ctx) => auth.handler(ctx.request))
-  .get("/api/auth/list-sessions", (ctx) => auth.handler(ctx.request))
-  .post("/api/auth/session", (ctx) => auth.handler(ctx.request))
+  .get(
+    "/",
+    () => "This ERP system is under development and not yet production-ready.",
+  )
   .get("/api/me", async (ctx) => {
     try {
       const session = await auth.api.getSession({
@@ -37,6 +35,9 @@ const app = new Elysia()
       return { error: "Unauthorized" };
     }
   })
+
   .listen(3000);
+
+app.all("/api/auth/*", (ctx) => auth.handler(ctx.request));
 
 export type App = typeof app;

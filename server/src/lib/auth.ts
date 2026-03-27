@@ -13,6 +13,10 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  advanced: {
+    cookiePrefix: "erp-auth",
+    crossOrigin: true, // Set to true if SvelteKit and Elysia are on different domains
+  },
   session: {
     expiresIn: 60 * 60 * 24 * 7, // 7 days
     updateAge: 60 * 60 * 24, // Update every day

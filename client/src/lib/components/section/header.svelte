@@ -25,8 +25,8 @@
 </div>
 
 <div class="flex items-center h-6 space-x-4">
-    <Button variant="outline">Login</Button>
-    <Button>Register</Button>
+    <Button onclick={() => (window.location.href = "/login")} variant="outline">Login</Button>
+    <Button onclick={() => (window.location.href = "/register")}>Register</Button>
     <Separator orientation="vertical"/>
     <a href="https://github.com/fullstackDev0404/EXASHARP.git" target="_blank" rel="noopener noreferrer" class="hover:bg-gray-200 h-7.5 rounded-lg w-7.5 flex items-center justify-center">
         <Icon icon="mdi:github" class="w-5 h-5" />

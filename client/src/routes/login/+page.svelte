@@ -1,29 +1,32 @@
 <script lang="ts">
-	let email = '';
-	let password = '';
 
-	const login = async () => {
-		const res = await fetch('http://localhost:3000/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ email, password })
-		});
-
-		const data = await res.json();
-
-		if (res.ok) {
-			alert('Login success');
-		} else {
-			alert(data.message);
-		}
-	};
+	import LoginForm from "$lib/components/login-form.svelte";
+    import Icon from "@iconify/svelte";
 </script>
 
-<h1>Login</h1>
-
-<input placeholder="Email" bind:value={email} />
-<input placeholder="Password" type="password" bind:value={password} />
-
-<button on:click={login}>Login</button>
+<div class="grid min-h-svh lg:grid-cols-2">
+	<div class="flex flex-col gap-4 p-6 md:p-10">
+		<div class="flex justify-center gap-2 md:justify-start">
+			<a href="##" class="flex items-center gap-2 font-medium">
+				<div
+					class="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md"
+				>
+					<Icon icon="boxicons:compass-tool" class="size-4" />
+				</div>
+				EXASHARP
+			</a>
+		</div>
+		<div class="flex flex-1 items-center justify-center">
+			<div class="w-full max-w-xs">
+				<LoginForm />
+			</div>
+		</div>
+	</div>
+	<div class="bg-muted relative hidden lg:block">
+		<img
+			src="/winter-in-finland.webp"
+			alt="placeholder"
+			class="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+		/>
+	</div>
+</div>
