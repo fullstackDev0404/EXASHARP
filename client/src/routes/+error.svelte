@@ -4,6 +4,10 @@
   import Button from "$lib/components/ui/button/button.svelte";
 </script>
 
+<svelte:head>
+  <title>{page.status || 500} - An error occurred</title>
+</svelte:head>
+
 <main
   class="flex flex-col items-center justify-center min-h-screen gap-5 px-4 animate-in fade-in duration-500"
 >

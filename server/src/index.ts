@@ -8,8 +8,9 @@ const app = new Elysia()
   .use(openapi())
   .use(
     cors({
+      origin: "http://localhost:5173",
       credentials: true,
-      origin: true,
+
       allowedHeaders: ["Content-Type", "Authorization"],
     }),
   )
@@ -35,7 +36,7 @@ const app = new Elysia()
       return { error: "Unauthorized" };
     }
   })
-
+  
   .listen(3000);
 
 app.all("/api/auth/*", (ctx) => auth.handler(ctx.request));
