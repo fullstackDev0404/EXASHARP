@@ -15,6 +15,20 @@
       "when": 1774491335443,
       "tag": "0001_melodic_franklin_richards",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1774574266750,
+      "tag": "0002_material_madame_masque",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1774574722603,
+      "tag": "0003_pale_chronomancer",
+      "breakpoints": true
     }
   ]
 }

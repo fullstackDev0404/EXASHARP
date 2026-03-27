@@ -9,9 +9,6 @@ const app = new Elysia()
   .decorate('db', db) // DB for handlers
   
   .get('/', () => 'Hello, Elysia!') // Basic route to test the server
-  .get('/users', ({ db }) => {
-    return db.query.users.findMany();
-  })
   .listen(3000)
 
 export type App = typeof app;
