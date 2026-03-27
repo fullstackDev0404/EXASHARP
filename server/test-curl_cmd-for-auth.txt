@@ -1,0 +1,66 @@
+//signup
+---------------------------------------------------------------
+curl -X POST http://localhost:3000/api/auth/sign-up/email \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "password": "S3cureP@ss",
+    "image": "https://example.com/avatar.png",
+    "callbackURL": "http://localhost:3000",
+    "rememberMe": true
+  }' \
+  -c cookies.txt
+---------------------------------------------------------------
+
+//sign-in
+---------------------------------------------------------------
+  curl -X POST http://localhost:3000/api/auth/sign-in/email \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "john.doe@example.com",
+    "password": "S3cureP@ss",
+    "callbackURL": "http://localhost:3000",
+    "rememberMe": true
+  }' \
+  -c cookies.txt
+---------------------------------------------------------------
+
+//session
+---------------------------------------------------------------
+  curl -X POST http://localhost:3000/api/auth/session \
+  -H "Content-Type: application/json" \
+  -b cookies.txt
+---------------------------------------------------------------
+
+
+//list-session
+---------------------------------------------------------------
+  curl -X GET http://localhost:3000/api/auth/list-sessions \
+  -b cookies.txt
+
+  //or
+
+  curl -X GET http://localhost:3000/api/auth/list-sessions \
+  -H "Authorization: Bearer <your-token>"
+---------------------------------------------------------------
+
+//sign-out
+---------------------------------------------------------------
+  curl -X POST http://localhost:3000/api/auth/sign-out \
+  -H "Origin: http://localhost:3000" \
+  -b cookies.txt \
+  -c cookies.txt
+---------------------------------------------------------------
+
+
+//profile
+---------------------------------------------------------------
+  curl -X GET http://localhost:3000/api/me \
+  -b cookies.txt
+
+  //or
+
+  curl -X GET http://localhost:3000/api/me \
+  -H "Authorization: Bearer <your-token>"
+---------------------------------------------------------------
