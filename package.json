@@ -2,10 +2,10 @@
   "name": "experimental",
   "version": "0.0.0",
   "description": "An ERP web hosting SAAS application.",
-    "keywords": [
+  "keywords": [
     "ERP"
   ],
-   "homepage": "https://github.com/fullstackDev0404/EXASHARP#readme",
+  "homepage": "https://github.com/fullstackDev0404/EXASHARP#readme",
   "bugs": {
     "url": "https://github.com/fullstackDev0404/EXASHARP/issues"
   },

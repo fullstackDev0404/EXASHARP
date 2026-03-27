@@ -4,7 +4,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts",
-    "clean": "rm -rf dist node_modules bun.lock",
+    "clean": "rm -rf dist node_modules",
     "db:generate": "drizzle-kit generate --config drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config drizzle.config.ts",
     "db:push": "drizzle-kit push --config drizzle.config.ts",
@@ -15,6 +15,7 @@
     "@elysiajs/cors": "^1.4.1",
     "@elysiajs/openapi": "^1.4.14",
     "@neondatabase/serverless": "^1.0.2",
+    "better-auth": "^1.5.6",
     "drizzle-orm": "^0.45.1",
     "elysia": "latest",
     "pg": "^8.20.0"
