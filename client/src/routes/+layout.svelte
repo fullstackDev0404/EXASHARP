@@ -7,6 +7,6 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title></title>
+	<title>Enterprise Resource Planning (ERP) - EXASHARP</title>
 </svelte:head>
 {@render children()}
