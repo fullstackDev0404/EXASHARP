@@ -16,7 +16,7 @@ const app = new Elysia()
 
   .decorate("db", db)
   .decorate("auth", auth)
-  .get("/", () => "Hello, Elysia!")
+  .get("/", () => "This ERP system is under development and not yet production-ready.")
   .post("/api/auth/sign-up/email", (ctx) => auth.handler(ctx.request))
   .post("/api/auth/sign-in/email", (ctx) => auth.handler(ctx.request))
   .post("/api/auth/sign-out", (ctx) => auth.handler(ctx.request))
