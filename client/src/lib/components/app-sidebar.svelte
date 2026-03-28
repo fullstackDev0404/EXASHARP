@@ -19,27 +19,18 @@
 	import TeamSwitcher from "./team-switcher.svelte";
 	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
 	import type { ComponentProps } from "svelte";
-	import { authClient } from "$lib/auth-client";
+  import { authClient } from "$lib/auth-client";
+  
+  const session = authClient.useSession();
 
-	const session = authClient.useSession();
-	// console.log("Session data:", $session.data);
-  $effect(() => {
-    if ($session.data) {
-        console.log("Session data loaded:", $session.data);
-    } else if ($session.isPending) {
-        console.log("Session is currently loading...");
-    } else {
-        console.log("No session found (User is logged out).");
-    }
-});
   
 
 	// This is sample data.
 	let sideBarData = {
 		user: {
-			name: $session.data?.user?.name ?? "Guest User",
-			email: $session.data?.user?.email || "m@example.com",
-			avatar: $session.data?.user?.image || "/avatars/shadcn.jpg",
+			name: "shadcn",
+			email: "m@example.com",
+			avatar: "/avatars/shadcn.jpg",
 		},
 		teams: [
 			{
@@ -184,3 +175,5 @@
 	</Sidebar.Footer>
 	<Sidebar.Rail />
 </Sidebar.Root>
+
+
