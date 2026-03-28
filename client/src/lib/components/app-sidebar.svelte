@@ -9,13 +9,37 @@
 	import MapIcon from "@lucide/svelte/icons/map";
 	import Settings2Icon from "@lucide/svelte/icons/settings-2";
 	import SquareTerminalIcon from "@lucide/svelte/icons/square-terminal";
+	
+</script>
+
+<script lang="ts">
+	import NavMain from "./nav-main.svelte";
+	import NavProjects from "./nav-projects.svelte";
+	import NavUser from "./nav-user.svelte";
+	import TeamSwitcher from "./team-switcher.svelte";
+	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+	import type { ComponentProps } from "svelte";
+	import { authClient } from "$lib/auth-client";
+
+	const session = authClient.useSession();
+	// console.log("Session data:", $session.data);
+  $effect(() => {
+    if ($session.data) {
+        console.log("Session data loaded:", $session.data);
+    } else if ($session.isPending) {
+        console.log("Session is currently loading...");
+    } else {
+        console.log("No session found (User is logged out).");
+    }
+});
+  
 
 	// This is sample data.
-	const data = {
+	let sideBarData = {
 		user: {
-			name: "shadcn",
-			email: "m@example.com",
-			avatar: "/avatars/shadcn.jpg",
+			name: $session.data?.user?.name ?? "Guest User",
+			email: $session.data?.user?.email || "m@example.com",
+			avatar: $session.data?.user?.image || "/avatars/shadcn.jpg",
 		},
 		teams: [
 			{
@@ -139,15 +163,6 @@
 			},
 		],
 	};
-</script>
-
-<script lang="ts">
-	import NavMain from "./nav-main.svelte";
-	import NavProjects from "./nav-projects.svelte";
-	import NavUser from "./nav-user.svelte";
-	import TeamSwitcher from "./team-switcher.svelte";
-	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
-	import type { ComponentProps } from "svelte";
 
 	let {
 		ref = $bindable(null),
@@ -158,14 +173,14 @@
 
 <Sidebar.Root bind:ref {collapsible} {...restProps}>
 	<Sidebar.Header>
-		<TeamSwitcher teams={data.teams} />
+		<TeamSwitcher teams={sideBarData.teams} />
 	</Sidebar.Header>
 	<Sidebar.Content>
-		<NavMain items={data.navMain} />
-		<NavProjects projects={data.projects} />
+		<NavMain items={sideBarData.navMain} />
+		<NavProjects projects={sideBarData.projects} />
 	</Sidebar.Content>
 	<Sidebar.Footer>
-		<NavUser user={data.user} />
+		<NavUser user={sideBarData.user} />
 	</Sidebar.Footer>
 	<Sidebar.Rail />
 </Sidebar.Root>
