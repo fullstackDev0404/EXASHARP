@@ -17,9 +17,7 @@ import { relations } from "drizzle-orm";
 import { 
   genderEnum, 
   auditActionEnum,
-  addressTypeEnum,
-    documentTypeEnum,
-    contractTypeEnum,
+  contractTypeEnum,
     attendanceStatusEnum,
     attendanceSourceEnum,
     leaveTypeEnum,
@@ -34,13 +32,16 @@ import {
 
 import { company, role, permission, userRole, rolePermission } from "./core";
 
-import { employee } from "./employees";
+import { employee, experience, document, address, education, emergencyContact } from "./employees";
 
 import { department, position } from "./organization";
+
+import { shift, employeeShift } from "./attendance";
 
 import { bankInfo } from "./payroll";
 
 import { salaryStructure } from "./payroll";
+
 
 
 
@@ -72,145 +73,10 @@ export const auditLog = pgTable(
   ],
 );
 
-// ============================================
-// EMERGENCY CONTACT (Normalized)
-// ============================================
-
-export const emergencyContact = pgTable(
-  "emergency_contact",
-  {
-    id: serial("id").primaryKey(),
-    employeeId: integer("employee_id")
-      .notNull()
-      .references(() => employee.id, { onDelete: "cascade" }),
-    name: text("name").notNull(),
-    relationship: text("relationship").notNull(),
-    contactNo: text("contact_no").notNull(),
-    alternateContactNo: text("alternate_contact_no"),
-    email: text("email"),
-    address: text("address"),
-    priority: integer("priority").default(1),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (t) => [index("emergency_employee_idx").on(t.employeeId)],
-);
 
 
 
-// ============================================
-// ADDRESS (With company support)
-// ============================================
 
-export const address = pgTable(
-  "address",
-  {
-    id: serial("id").primaryKey(),
-    employeeId: integer("employee_id")
-      .notNull()
-      .references(() => employee.id, { onDelete: "cascade" }),
-    type: addressTypeEnum("type").notNull().default("present"),
-    street: text("street").notNull(),
-    city: text("city").notNull(),
-    policeStation: text("police_station"),
-    postOffice: text("post_office"),
-    state: text("state"),
-    postalCode: text("postal_code"),
-    country: text("country").notNull().default("Bangladesh"),
-    isPrimary: boolean("is_primary").default(false),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (t) => [
-    index("address_employee_idx").on(t.employeeId),
-    index("address_type_idx").on(t.type),
-  ],
-);
-
-// ============================================
-// EDUCATION
-// ============================================
-
-export const education = pgTable(
-  "education",
-  {
-    id: serial("id").primaryKey(),
-    employeeId: integer("employee_id")
-      .notNull()
-      .references(() => employee.id, { onDelete: "cascade" }),
-    institution: text("institution").notNull(),
-    degree: text("degree").notNull(),
-    fieldOfStudy: text("field_of_study"),
-    result: text("result"),
-    startDate: date("start_date").notNull(),
-    endDate: date("end_date"),
-    isHighest: boolean("is_highest").default(false),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (t) => [
-    index("education_employee_idx").on(t.employeeId),
-    index("education_degree_idx").on(t.degree),
-  ],
-);
-
-// ============================================
-// EXPERIENCE
-// ============================================
-
-export const experience = pgTable(
-  "experience",
-  {
-    id: serial("id").primaryKey(),
-    employeeId: integer("employee_id")
-      .notNull()
-      .references(() => employee.id, { onDelete: "cascade" }),
-    company: text("company").notNull(),
-    position: text("position").notNull(),
-    startDate: date("start_date").notNull(),
-    endDate: date("end_date"),
-    isCurrent: boolean("is_current").default(false),
-    description: text("description"),
-    responsibilities: json("responsibilities"),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (t) => [
-    index("experience_employee_idx").on(t.employeeId),
-    index("experience_company_idx").on(t.company),
-  ],
-);
-
-// ============================================
-// DOCUMENT
-// ============================================
-
-export const document = pgTable(
-  "document",
-  {
-    id: serial("id").primaryKey(),
-    employeeId: integer("employee_id")
-      .notNull()
-      .references(() => employee.id, { onDelete: "cascade" }),
-    documentType: documentTypeEnum("document_type").notNull(),
-    documentPath: text("document_path").notNull(),
-    fileName: text("file_name").notNull(),
-    fileSize: integer("file_size"),
-    mimeType: text("mime_type"),
-    description: text("description"),
-    uploadedBy: integer("uploaded_by").references(() => employee.id),
-    isVerified: boolean("is_verified").default(false),
-    verifiedBy: integer("verified_by").references(() => employee.id),
-    verifiedAt: timestamp("verified_at"),
-    expiresAt: timestamp("expires_at"),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (t) => [
-    index("document_employee_idx").on(t.employeeId),
-    index("document_type_idx").on(t.documentType),
-  ],
-);
 
 // ============================================
 // CONTRACT MANAGEMENT
@@ -242,55 +108,7 @@ export const contract = pgTable(
   ],
 );
 
-// ============================================
-// SHIFT MANAGEMENT
-// ============================================
 
-export const shift = pgTable(
-  "shift",
-  {
-    id: serial("id").primaryKey(),
-    companyId: integer("company_id")
-      .notNull()
-      .references(() => company.id, { onDelete: "cascade" }),
-    name: text("name").notNull(),
-    code: text("code").notNull(),
-    startTime: text("start_time").notNull(), // "09:00:00"
-    endTime: text("end_time").notNull(),
-    gracePeriod: integer("grace_period"), // minutes
-    breakTime: integer("break_time"), // minutes
-    workingHours: integer("working_hours"), // minutes
-    isNightShift: boolean("is_night_shift").default(false),
-    isActive: boolean("is_active").default(true),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-    updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  },
-  (t) => [
-    unique("shift_company_code").on(t.companyId, t.code),
-    index("shift_company_idx").on(t.companyId),
-  ],
-);
-
-export const employeeShift = pgTable(
-  "employee_shift",
-  {
-    id: serial("id").primaryKey(),
-    employeeId: integer("employee_id")
-      .notNull()
-      .references(() => employee.id, { onDelete: "cascade" }),
-    shiftId: integer("shift_id")
-      .notNull()
-      .references(() => shift.id, { onDelete: "cascade" }),
-    date: date("date").notNull(),
-    assignedBy: integer("assigned_by").references(() => employee.id),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-  },
-  (t) => [
-    unique("employee_shift_date").on(t.employeeId, t.date),
-    index("emp_shift_employee_idx").on(t.employeeId),
-    index("emp_shift_date_idx").on(t.date),
-  ],
-);
 
 // ============================================
 // ATTENDANCE (Enhanced)

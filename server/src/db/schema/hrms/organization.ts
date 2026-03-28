@@ -8,9 +8,11 @@ import {
   index,
   pgTable,
   serial,
+  date,
 } from "drizzle-orm/pg-core";
 
 import { company } from "./core";
+import { employee } from "./employees";
 
 // ============================================
 // DEPARTMENT (With company support)
@@ -75,3 +77,4 @@ export const position = pgTable(
     index("position_company_idx").on(t.companyId),
   ],
 );
+
