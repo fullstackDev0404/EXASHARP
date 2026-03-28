@@ -1,7 +1,7 @@
 <script lang="ts">
 	import AuthNavbar from '$lib/components/auth/auth-navbar.svelte';
 	import AuthCard from '$lib/components/auth/auth-card.svelte';
-	import Input from '$lib/components/ui/input/input.svelte';
+	import { Input } from '$lib/components/ui/input';
 
 	let name = $state('');
 	let email = $state('');
@@ -103,7 +103,7 @@
 				<div class="space-y-1">
 					<Input type="password" placeholder="Confirm Password" bind:value={confirmPassword} icon="password"
 						error={!!confirmPasswordError}
-						onkeydown={(e) => e.key === 'Enter' && register()} />
+						onkeydown={(e: KeyboardEvent) => e.key === 'Enter' && register()} />
 					{#if confirmPasswordError}<p class="text-xs text-red-400 pl-1">{confirmPasswordError}</p>{/if}
 				</div>
 

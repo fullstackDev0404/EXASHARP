@@ -1,8 +1,8 @@
 <script lang="ts">
 	import AuthNavbar from '$lib/components/auth/auth-navbar.svelte';
 	import AuthCard from '$lib/components/auth/auth-card.svelte';
-	import Input from '$lib/components/ui/input/input.svelte';
-	import Checkbox from '$lib/components/ui/checkbox/checkbox.svelte';
+	import { Input } from '$lib/components/ui/input';
+	import { Checkbox } from '$lib/components/ui/checkbox';
 
 	let email = $state('');
 	let password = $state('');
@@ -74,7 +74,7 @@
 
 				<div class="space-y-1">
 					<Input type="password" placeholder="Password" bind:value={password} icon="password" error={!!passwordError}
-						onkeydown={(e) => e.key === 'Enter' && login()} />
+						onkeydown={(e: KeyboardEvent) => e.key === 'Enter' && login()} />
 					{#if passwordError}<p class="text-xs text-red-400 pl-1">{passwordError}</p>{/if}
 				</div>
 
