@@ -10,7 +10,7 @@ import * as performance from './performance';
 import * as recruitment from './recruitment';
 import * as system from './system';
 import * as tableRelations from './table-relations';
-import * as types from './types';
+
     
 export const hrmsSchema = {
     ...assets,
@@ -24,6 +24,5 @@ export const hrmsSchema = {
     ...performance,
     ...recruitment,
     ...system,
-    ...tableRelations,
-    ...types,
+    ...tableRelations
 }
