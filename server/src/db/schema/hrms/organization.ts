@@ -12,7 +12,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 import { company } from "./core";
-import { employee } from "./employees";
+import { employee } from "./employee";
 
 // ============================================
 // DEPARTMENT (With company support)

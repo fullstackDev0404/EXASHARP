@@ -1,10 +1,10 @@
 
 
-import { genderEnum, bloodGroupEnum, maritalStatusEnum, documentTypeEnum, addressTypeEnum } from "./enums";
+import { genderEnum, bloodGroupEnum, maritalStatusEnum, documentTypeEnum, addressTypeEnum, contractTypeEnum } from "./enums";
 
 import { company } from "./core";
 
-import { boolean, date, index, integer, json, pgTable, serial, text, timestamp, unique } from "drizzle-orm/pg-core";
+import { boolean, date, decimal, index, integer, json, pgTable, serial, text, timestamp, unique } from "drizzle-orm/pg-core";
 import { department, position } from "./organization";
 
 // ============================================
@@ -199,5 +199,84 @@ export const emergencyContact = pgTable(
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
   (t) => [index("emergency_employee_idx").on(t.employeeId)],
+);
+
+
+// ============================================
+// HISTORY TABLES
+// ============================================
+
+export const positionHistory = pgTable(
+  "position_history",
+  {
+    id: serial("id").primaryKey(),
+    employeeId: integer("employee_id")
+      .notNull()
+      .references(() => employee.id, { onDelete: "cascade" }),
+    positionId: integer("position_id").notNull(),
+    departmentId: integer("department_id"),
+    changedAt: timestamp("changed_at").notNull().defaultNow(),
+    changedById: integer("changed_by_id").references(() => employee.id),
+    reason: text("reason"),
+    effectiveDate: date("effective_date").notNull(),
+  },
+  (t) => [
+    index("pos_history_employee_idx").on(t.employeeId),
+    index("pos_history_effective_idx").on(t.effectiveDate),
+  ],
+);
+
+export const salaryHistory = pgTable(
+  "salary_history",
+  {
+    id: serial("id").primaryKey(),
+    employeeId: integer("employee_id")
+      .notNull()
+      .references(() => employee.id, { onDelete: "cascade" }),
+    oldSalary: decimal("old_salary", { precision: 12, scale: 2 }),
+    newSalary: decimal("new_salary", { precision: 12, scale: 2 }).notNull(),
+    effectiveFrom: date("effective_from").notNull(),
+    changedAt: timestamp("changed_at").notNull().defaultNow(),
+    changedById: integer("changed_by_id").references(() => employee.id),
+    reason: text("reason"),
+    approvalStatus: text("approval_status").default("approved"),
+  },
+  (t) => [
+    index("salary_history_employee_idx").on(t.employeeId),
+    index("salary_history_effective_idx").on(t.effectiveFrom),
+  ],
+);
+
+
+
+
+// ============================================
+// CONTRACT MANAGEMENT
+// ============================================
+
+export const contract = pgTable(
+  "contract",
+  {
+    id: serial("id").primaryKey(),
+    employeeId: integer("employee_id")
+      .notNull()
+      .references(() => employee.id, { onDelete: "cascade" }),
+    contractType: contractTypeEnum("contract_type").notNull(),
+    startDate: date("start_date").notNull(),
+    endDate: date("end_date"),
+    probationPeriod: integer("probation_period"), // in days
+    noticePeriod: integer("notice_period"), // in days
+    salary: integer("salary"),
+    documentPath: text("document_path"),
+    isActive: boolean("is_active").default(true),
+    signedBy: integer("signed_by").references(() => employee.id),
+    signedAt: timestamp("signed_at"),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (t) => [
+    index("contract_employee_idx").on(t.employeeId),
+    index("contract_dates_idx").on(t.startDate, t.endDate),
+  ],
 );
 
