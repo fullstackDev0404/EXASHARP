@@ -12,7 +12,7 @@ import * as system from './system';
 import * as tableRelations from './table-relations';
 import * as types from './types';
     
-export const hrms = {
+export const hrmsSchema = {
     ...assets,
     ...attendance,
     ...core,
