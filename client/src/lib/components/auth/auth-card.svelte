@@ -7,16 +7,14 @@
 	let { title, children }: Props = $props();
 </script>
 
-<div class="w-full max-w-md rounded-2xl bg-[#1a1f2e]/50 backdrop-blur-sm border border-white/10 shadow-2xl overflow-hidden">
+<div class="w-full max-w-md rounded-2xl overflow-hidden shadow-2xl" style="background: #1c1c24; border: 1px solid rgba(255,255,255,0.08);">
 	<div class="flex">
 		<!-- Yellow left accent bar -->
-		<div class="w-1.5 bg-yellow-400 flex-shrink-0"></div>
+		<div class="w-1.5 flex-shrink-0" style="background: linear-gradient(180deg, #f5a623, #d17f1e);"></div>
 		<div class="flex-1 px-10 py-10">
 			<!-- Logo -->
 			<div class="mb-6 flex justify-center">
-				<div class="flex items-center gap-2">
-					<img src="/logo.png" alt="EXASHARP" class="h-12 w-auto" />
-				</div>
+				<img src="/logo.png" alt="EXASHARP" class="h-12 w-auto" />
 			</div>
 
 			<h1 class="mb-7 text-center text-2xl font-semibold text-white">{title}</h1>

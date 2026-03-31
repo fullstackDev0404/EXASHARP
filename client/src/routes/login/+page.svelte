@@ -83,14 +83,15 @@
 				<button
 					onclick={login}
 					disabled={loading}
-					class="w-full rounded-lg bg-yellow-400 py-3 text-base font-bold text-black hover:bg-yellow-300 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+					class="w-full py-3 text-base font-bold text-black rounded-lg disabled:opacity-60 disabled:cursor-not-allowed"
+					style="background: #f5a623;"
 				>
 					{loading ? 'Signing in...' : 'Sign In'}
 				</button>
 
 				<p class="text-center text-sm text-gray-400">
 					Don't have an account?
-					<a href="/register" class="font-semibold text-yellow-400 hover:text-yellow-300 transition-colors">Register</a>
+					<a href="/register" class="font-semibold text-yellow-400 hover:text-yellow-300 transition-colors">Sign Up</a>
 				</p>
 			</div>
 		</AuthCard>

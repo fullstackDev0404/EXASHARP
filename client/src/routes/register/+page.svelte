@@ -107,7 +107,8 @@
 				<button
 					onclick={register}
 					disabled={loading}
-					class="w-full rounded-lg bg-yellow-400 py-3 text-base font-bold text-black hover:bg-yellow-300 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+					class="w-full py-3 text-base font-bold text-black rounded-lg disabled:opacity-60 disabled:cursor-not-allowed"
+					style="background: #f5a623;"
 				>
 					{loading ? 'Creating account...' : 'Register'}
 				</button>

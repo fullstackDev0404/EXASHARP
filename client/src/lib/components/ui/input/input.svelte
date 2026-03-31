@@ -11,7 +11,7 @@
 	let { type = 'text', placeholder = '', value = $bindable(''), error = false, icon, onkeydown }: Props = $props();
 </script>
 
-<div class="flex items-center gap-3 rounded-lg bg-[#0f1420] border px-4 py-3 transition-colors {error ? 'border-red-500' : 'border-white/10'}">
+<div class="flex items-center gap-3 rounded-lg px-4 py-3 transition-colors {error ? 'border border-red-500' : 'border border-white/10'}" style="background: #0f1117;">
 	{#if icon === 'email'}
 		<svg class="h-4 w-4 flex-shrink-0 {error ? 'text-red-400' : 'text-gray-400'}" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
 			<path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />

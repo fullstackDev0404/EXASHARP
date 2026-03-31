@@ -210,7 +210,16 @@
   }
 }
 
-@utility no-scrollbar {
+@utility btn-gold {
+  background: linear-gradient(179deg, #dba74e, #d17f1e, #bf6508);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+  color: #000;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  transition: opacity 0.2s;
+  &:hover { opacity: 0.9; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
 	-ms-overflow-style: none;
 	scrollbar-width: none;
   &::-webkit-scrollbar {

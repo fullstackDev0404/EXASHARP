@@ -9,11 +9,14 @@
 </script>
 
 <aside class="hidden md:flex flex-col w-52 shrink-0 h-screen overflow-y-auto bg-black/50 backdrop-blur-sm border-r border-white/10 sticky top-0">
+	<!-- Logo -->
+	<div class="flex items-center gap-2 px-4 py-4 border-b border-white/10">
+		<img src="/logo.png" alt="EXASHARP" class="h-9 w-auto" />
+	</div>
+
 	<!-- User -->
 	<div class="flex items-center gap-3 px-4 py-4 border-b border-white/10">
-		<div class="h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center text-black font-bold shrink-0">
-			{userName[0]}
-		</div>
+		<img src="/user_avatar.png" alt="User avatar" class="h-8 w-8 rounded-full object-cover border border-yellow-400/50" />
 		<div class="min-w-0">
 			<p class="text-sm font-semibold truncate">{userName}</p>
 			<p class="text-xs text-gray-400">HR Manager</p>
