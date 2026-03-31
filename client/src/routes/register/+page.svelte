@@ -1,5 +1,4 @@
 <script lang="ts">
-	import AuthNavbar from '$lib/components/auth/auth-navbar.svelte';
 	import AuthCard from '$lib/components/auth/auth-card.svelte';
 	import { Input } from '$lib/components/ui/input';
 
@@ -76,9 +75,7 @@
 <div class="relative min-h-screen w-full overflow-hidden bg-[#0a0a0f]">
 	<img src="/auth-bg.png" alt="" class="absolute inset-0 h-full w-full object-cover opacity-60" aria-hidden="true" />
 
-	<AuthNavbar />
-
-	<div class="relative z-10 flex min-h-[calc(100vh-250px)] items-center justify-center px-4">
+	<div class="relative z-10 flex min-h-[calc(100vh-80px)] items-center justify-center px-4">
 		<AuthCard title="Create Account">
 			{#if serverError}
 				<p class="mb-4 rounded-lg bg-red-500/20 px-4 py-2 text-center text-sm text-red-400">{serverError}</p>

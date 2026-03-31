@@ -1,6 +1,5 @@
 <script lang="ts">
     import Footer from "$lib/components/section/footer.svelte";
-    import Header from "$lib/components/section/header.svelte";
     import Button from "$lib/components/ui/button/button.svelte";
     let { data } = $props()
 </script>
@@ -8,8 +7,6 @@
 <svelte:head>
     <title>EXASHARP - The Foundation for your ERP System</title>
 </svelte:head>
-
-<Header />
 
 <div class="flex items-center justify-center flex-col py-25">
     <div class="pb-4 flex items-center gap-2 text-sm font-medium leading-6 text-center text-primary">
