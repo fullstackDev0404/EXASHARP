@@ -2,6 +2,7 @@
 	import AuthCard from '$lib/components/auth/auth-card.svelte';
 	import { Input } from '$lib/components/ui/input';
 	import { Checkbox } from '$lib/components/ui/checkbox';
+	import PrimaryButton from '$lib/components/ui/primary-button/primary-button.svelte';
 
 	let email = $state('');
 	let password = $state('');
@@ -80,14 +81,9 @@
 					<a href="/forgot-password" class="text-sm text-gray-400 hover:text-white transition-colors">Forgot Password?</a>
 				</div>
 
-				<button
-					onclick={login}
-					disabled={loading}
-					class="w-full py-3 text-base font-bold text-black rounded-lg disabled:opacity-60 disabled:cursor-not-allowed"
-					style="background: #f5a623;"
-				>
+				<PrimaryButton onclick={login} disabled={loading} class="w-full py-3 text-base">
 					{loading ? 'Signing in...' : 'Sign In'}
-				</button>
+				</PrimaryButton>
 
 				<p class="text-center text-sm text-gray-400">
 					Don't have an account?

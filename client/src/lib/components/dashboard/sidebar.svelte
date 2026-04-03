@@ -24,14 +24,14 @@
 	</div>
 
 	<!-- Nav -->
-	<nav class="flex-1 py-3 space-y-0.5 px-2">
+	<nav class="flex-1 space-y-0.5">
 		{#each navItems as item}
 			<a
 				href={item.href}
-				class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors
-					{item.active ? 'bg-yellow-400/20 text-yellow-400 font-medium border-l-2 border-yellow-400' : 'text-gray-300 hover:bg-white/10 hover:text-white'}"
+				class="flex items-center gap-3 px-3 py-2 text-md transition-colors
+					{item.active ? 'bg-yellow-400/20  font-medium border-l-2 border-yellow-400' : 'text-gray-300 hover:bg-white/10 hover:text-white'}"
 			>
-				<Icon icon={item.icon} class="h-4 w-4 shrink-0" />
+				<Icon icon={item.icon} class="h-4 w-4 shrink-0 {item.active && 'text-yellow-400'}" />
 				{item.label}
 				{#if item.active}<span class="ml-auto">›</span>{/if}
 			</a>

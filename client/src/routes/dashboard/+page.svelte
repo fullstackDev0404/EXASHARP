@@ -5,6 +5,7 @@
 	import PersonListItem from '$lib/components/dashboard/person-list-item.svelte';
 	import DonutChart from '$lib/components/charts/donut-chart.svelte';
 	import FunnelChart from '$lib/components/charts/funnel-chart.svelte';
+	import BarChart from '$lib/components/charts/bar-chart.svelte';
 	import {
 		pendingLeaves, upcomingEvents, payrollBars,
 		funnelStages, recruitmentStages, headcountBars
@@ -41,11 +42,7 @@
 					<StatCard title="Total Headcount" icon="👥" footer="HR: 89 · Sales: 89 · IT: 35 · Eng: 56">
 						{#snippet children()}
 							<p class="text-4xl font-bold">256</p>
-							<div class="flex gap-1 items-end h-8">
-								{#each headcountBars as h}
-									<div class="flex-1 bg-yellow-500/60 rounded-sm" style="height:{h * 10}%"></div>
-								{/each}
-							</div>
+							<BarChart bars={headcountBars} />
 						{/snippet}
 					</StatCard>
 
@@ -125,11 +122,7 @@
 				<StatCard title="Financial & Performance Insights" footer="763 / 2.80 · Completed · 1 Hiring · +4">
 					{#snippet children()}
 						<p class="text-xs text-gray-400 mb-2">Payroll Summary</p>
-						<div class="flex items-end gap-1 h-20">
-							{#each payrollBars as h}
-								<div class="flex-1 bg-yellow-500/70 rounded-t" style="height:{h}%"></div>
-							{/each}
-						</div>
+						<BarChart bars={payrollBars} />
 					{/snippet}
 				</StatCard>
 

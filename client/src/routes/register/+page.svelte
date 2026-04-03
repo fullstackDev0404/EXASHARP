@@ -1,6 +1,7 @@
 <script lang="ts">
 	import AuthCard from '$lib/components/auth/auth-card.svelte';
 	import { Input } from '$lib/components/ui/input';
+	import PrimaryButton from '$lib/components/ui/primary-button/primary-button.svelte';
 
 	let name = $state('');
 	let email = $state('');
@@ -104,14 +105,9 @@
 					{#if confirmPasswordError}<p class="text-xs text-red-400 pl-1">{confirmPasswordError}</p>{/if}
 				</div>
 
-				<button
-					onclick={register}
-					disabled={loading}
-					class="w-full py-3 text-base font-bold text-black rounded-lg disabled:opacity-60 disabled:cursor-not-allowed"
-					style="background: #f5a623;"
-				>
+				<PrimaryButton onclick={register} disabled={loading} class="w-full py-3 text-base">
 					{loading ? 'Creating account...' : 'Register'}
-				</button>
+				</PrimaryButton>
 
 				<p class="text-center text-sm text-gray-400">
 					Already have an account?

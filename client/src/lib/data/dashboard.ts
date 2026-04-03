@@ -26,7 +26,12 @@ export const upcomingEvents = [
 	{ name: 'Erik Johnson', role: 'IT Analyst', days: '8 Days' },
 ];
 
-export const payrollBars = [40, 65, 55, 80, 45, 70, 60];
+export const payrollBars = [
+	{ label: 'Jan', value: 40 }, { label: 'Feb', value: 65 },
+	{ label: 'Mar', value: 55 }, { label: 'Apr', value: 80 },
+	{ label: 'May', value: 45 }, { label: 'Jun', value: 70 },
+	{ label: 'Jul', value: 60 },
+];
 
 export const funnelStages = [
 	{ label: 'Screening', value: 26 },
@@ -41,4 +46,9 @@ export const recruitmentStages = [
 	{ label: '905', value: 10 },
 ];
 
-export const headcountBars = [3, 5, 4, 7, 6, 8, 5, 9];
+export const headcountBars = [
+	{ label: 'W1', value: 3 }, { label: 'W2', value: 5 },
+	{ label: 'W3', value: 4 }, { label: 'W4', value: 7 },
+	{ label: 'W5', value: 6 }, { label: 'W6', value: 8 },
+	{ label: 'W7', value: 5 }, { label: 'W8', value: 9 },
+];

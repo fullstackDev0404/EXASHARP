@@ -20,6 +20,7 @@
     "@sveltejs/kit": "^2.55.0",
     "@sveltejs/vite-plugin-svelte": "^6.2.4",
     "@tailwindcss/vite": "^4.1.18",
+    "@types/d3": "^7.4.3",
     "bits-ui": "^2.16.3",
     "clsx": "^2.1.1",
     "mode-watcher": "^1.1.0",
@@ -38,6 +39,8 @@
     "@elysiajs/eden": "^1.4.8",
     "@iconify/svelte": "^5.2.1",
     "@sveltejs/adapter-vercel": "^6.3.3",
-    "better-auth": "^1.5.6"
+    "better-auth": "^1.5.6",
+    "d3": "^7.9.0",
+    "layerchart": "^1.0.13"
   }
 }

@@ -1,18 +1,25 @@
 <script lang="ts">
-	type Bar = { label: string; value: number };
-	type Props = { bars: Bar[]; max?: number; color?: string };
+	import { Chart, Bars, Axis } from 'layerchart';
+	import { scaleBand, scaleLinear } from 'd3';
 
-	let { bars, max, color = 'bg-yellow-500' }: Props = $props();
-	const maxVal = $derived(max ?? Math.max(...bars.map(b => b.value)));
+	type Bar = { label: string; value: number };
+	type Props = { bars: Bar[]; color?: string };
+
+	let { bars, color = '#f5a623' }: Props = $props();
 </script>
 
-<div class="flex items-end gap-1 h-16 w-full">
-	{#each bars as bar}
-		<div class="flex flex-col items-center flex-1 gap-0.5">
-			<div
-				class="{color}/80 w-full rounded-t transition-all"
-				style="height: {maxVal > 0 ? (bar.value / maxVal) * 100 : 0}%"
-			></div>
-		</div>
-	{/each}
+<div class="h-24 w-full">
+	<Chart
+		data={bars}
+		x="label"
+		xScale={scaleBand().padding(0.3)}
+		y="value"
+		yScale={scaleLinear()}
+		padding={{ top: 4, bottom: 16, left: 0, right: 0 }}
+	>
+		<Bars {color} radius={2} />
+		<Axis placement="bottom" rule={false} tickLength={0}
+			format={(d: string) => d}
+			classes={{ tick: 'text-[9px] fill-gray-500' }} />
+	</Chart>
 </div>

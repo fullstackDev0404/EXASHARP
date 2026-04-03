@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import PrimaryButton from '$lib/components/ui/primary-button/primary-button.svelte';
 
 	type Props = {
 		user?: { id: string; name: string; email: string } | null;
@@ -63,9 +64,7 @@
 				<span class="absolute -top-1 -right-1 h-2 w-2 bg-yellow-400 rounded-full"></span>
 			</button>
 			<img src="/user_avatar.png" alt="User avatar" class="h-8 w-8 rounded-full object-cover border border-yellow-400/50" />
-			<button onclick={logout} class="px-5 py-2 text-sm font-bold text-black rounded-lg" style="background: #f5a623;">
-				Sign Out
-			</button>
+			<PrimaryButton onclick={logout} class="px-5 py-2 text-sm">Sign Out</PrimaryButton>
 		{:else if page.url.pathname === '/login'}
 			<a href="/register" class="px-5 py-2 text-sm font-bold text-black rounded-lg" style="background: #f5a623;">Sign Up</a>
 		{:else}
