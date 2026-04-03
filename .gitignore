@@ -58,3 +58,6 @@ Thumbs.db
 
 # Compatibility
 .turbo/
+
+# Cookies
+cookies.txt
