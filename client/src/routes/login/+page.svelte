@@ -2,7 +2,7 @@
 	import AuthCard from '$lib/components/auth/auth-card.svelte';
 	import { Input } from '$lib/components/ui/input';
 	import { Checkbox } from '$lib/components/ui/checkbox';
-	import PrimaryButton from '$lib/components/ui/primary-button/primary-button.svelte';
+	import { authClient } from '$lib/auth-client';
 
 	let email = $state('');
 	let password = $state('');
@@ -35,17 +35,14 @@
 		loading = true;
 		serverError = '';
 		try {
-			const res = await fetch('http://localhost:3000/api/auth/sign-in/email', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json', 'Origin': 'http://localhost:5173' },
-				credentials: 'include',
-				body: JSON.stringify({ email, password })
+			const { error } = await authClient.signIn.email({
+				email,
+				password
 			});
-			const data = await res.json();
-			if (res.ok) {
-				window.location.href = '/dashboard';
+			if (error) {
+				serverError = error.message || 'Invalid credentials.';
 			} else {
-				serverError = data.message || 'Invalid credentials.';
+				window.location.href = '/dashboard';
 			}
 		} catch {
 			serverError = 'Something went wrong. Please try again.';
@@ -64,15 +61,14 @@
 				<p class="mb-4 rounded-lg bg-red-500/20 px-4 py-2 text-center text-sm text-red-400">{serverError}</p>
 			{/if}
 
-			<div class="space-y-4">
+			<form onsubmit={(e) => { e.preventDefault(); login(); }} class="space-y-4">
 				<div class="space-y-1">
 					<Input type="email" placeholder="Email Address" bind:value={email} icon="email" error={!!emailError} />
 					{#if emailError}<p class="text-xs text-red-400 pl-1">{emailError}</p>{/if}
 				</div>
 
 				<div class="space-y-1">
-					<Input type="password" placeholder="Password" bind:value={password} icon="password" error={!!passwordError}
-						onkeydown={(e: KeyboardEvent) => e.key === 'Enter' && login()} />
+					<Input type="password" placeholder="Password" bind:value={password} icon="password" error={!!passwordError} />
 					{#if passwordError}<p class="text-xs text-red-400 pl-1">{passwordError}</p>{/if}
 				</div>
 
@@ -81,15 +77,19 @@
 					<a href="/forgot-password" class="text-sm text-gray-400 hover:text-white transition-colors">Forgot Password?</a>
 				</div>
 
-				<PrimaryButton onclick={login} disabled={loading} class="w-full py-3 text-base">
+				<button
+					type="submit"
+					disabled={loading}
+					class="w-full rounded-lg bg-yellow-400 py-3 text-base font-bold text-black hover:bg-yellow-300 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+				>
 					{loading ? 'Signing in...' : 'Sign In'}
-				</PrimaryButton>
+				</button>
 
 				<p class="text-center text-sm text-gray-400">
 					Don't have an account?
 					<a href="/register" class="font-semibold text-yellow-400 hover:text-yellow-300 transition-colors">Sign Up</a>
 				</p>
-			</div>
+			</form>
 		</AuthCard>
 	</div>
 </div>

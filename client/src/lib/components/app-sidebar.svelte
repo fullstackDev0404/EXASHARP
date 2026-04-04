@@ -9,7 +9,7 @@
 	import MapIcon from "@lucide/svelte/icons/map";
 	import Settings2Icon from "@lucide/svelte/icons/settings-2";
 	import SquareTerminalIcon from "@lucide/svelte/icons/square-terminal";
-	
+
 </script>
 
 <script lang="ts">
@@ -19,141 +19,72 @@
 	import TeamSwitcher from "./team-switcher.svelte";
 	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
 	import type { ComponentProps } from "svelte";
-  import { authClient } from "$lib/auth-client";
-  
-  const session = authClient.useSession();
+	import { page } from "$app/state";
 
-  
+	const user = $derived({
+		name: page.data.user?.name ?? "Guest",
+		email: page.data.user?.email ?? "guest@example.com",
+		avatar: "/avatars/shadcn.jpg"
+	});
 
-	// This is sample data.
-	let sideBarData = {
-		user: {
-			name: "shadcn",
-			email: "m@example.com",
-			avatar: "/avatars/shadcn.jpg",
+	const companies = $derived(page.data.companies || []);
+	const currentCompany = $derived(page.data.currentCompany);
+
+	const teams = $derived(
+		companies.length > 0
+			? companies.map((c: any) => ({
+					name: c.name,
+					logo: GalleryVerticalEndIcon,
+					plan: c.code,
+					isActive: c.id === currentCompany?.id,
+			  }))
+			: [{ name: "No Company", logo: CommandIcon, plan: "Join or create a company", isActive: true }]
+	);
+
+	const navMain = [
+		{
+			title: "Dashboard",
+			url: "/dashboard",
+			icon: SquareTerminalIcon,
+			isActive: true,
 		},
-		teams: [
-			{
-				name: "Acme Inc",
-				logo: GalleryVerticalEndIcon,
-				plan: "Enterprise",
-			},
-			{
-				name: "Acme Corp.",
-				logo: AudioWaveformIcon,
-				plan: "Startup",
-			},
-			{
-				name: "Evil Corp.",
-				logo: CommandIcon,
-				plan: "Free",
-			},
-		],
-		navMain: [
-			{
-				title: "Playground",
-				url: "#",
-				icon: SquareTerminalIcon,
-				isActive: true,
-				items: [
-					{
-						title: "History",
-						url: "#",
-					},
-					{
-						title: "Starred",
-						url: "#",
-					},
-					{
-						title: "Settings",
-						url: "#",
-					},
-				],
-			},
-			{
-				title: "Models",
-				url: "#",
-				icon: BotIcon,
-				items: [
-					{
-						title: "Genesis",
-						url: "#",
-					},
-					{
-						title: "Explorer",
-						url: "#",
-					},
-					{
-						title: "Quantum",
-						url: "#",
-					},
-				],
-			},
-			{
-				title: "Documentation",
-				url: "#",
-				icon: BookOpenIcon,
-				items: [
-					{
-						title: "Introduction",
-						url: "#",
-					},
-					{
-						title: "Get Started",
-						url: "#",
-					},
-					{
-						title: "Tutorials",
-						url: "#",
-					},
-					{
-						title: "Changelog",
-						url: "#",
-					},
-				],
-			},
-			{
-				title: "Settings",
-				url: "#",
-				icon: Settings2Icon,
-				items: [
-					{
-						title: "General",
-						url: "#",
-					},
-					{
-						title: "Team",
-						url: "#",
-					},
-					{
-						title: "Billing",
-						url: "#",
-					},
-					{
-						title: "Limits",
-						url: "#",
-					},
-				],
-			},
-		],
-		projects: [
-			{
-				name: "Design Engineering",
-				url: "#",
-				icon: FrameIcon,
-			},
-			{
-				name: "Sales & Marketing",
-				url: "#",
-				icon: ChartPieIcon,
-			},
-			{
-				name: "Travel",
-				url: "#",
-				icon: MapIcon,
-			},
-		],
-	};
+		{
+			title: "Employees",
+			url: "/dashboard/employees",
+			icon: BotIcon,
+			items: [],
+		},
+		{
+			title: "Documentation",
+			url: "#",
+			icon: BookOpenIcon,
+			items: [],
+		},
+		{
+			title: "Settings",
+			url: "/dashboard/settings",
+			icon: Settings2Icon,
+			items: [],
+		},
+	];
+
+	const projects = [
+		{
+			name: "Design Engineering",
+			url: "#",
+			icon: FrameIcon,
+		},
+		{
+			name: "Sales & Marketing",
+			url: "#",
+			icon: ChartPieIcon,
+		},
+		{
+			name: "Travel",
+			url: "#",
+			icon: MapIcon,
+		},
+	];
 
 	let {
 		ref = $bindable(null),
@@ -164,16 +95,14 @@
 
 <Sidebar.Root bind:ref {collapsible} {...restProps}>
 	<Sidebar.Header>
-		<TeamSwitcher teams={sideBarData.teams} />
+		<TeamSwitcher {teams} />
 	</Sidebar.Header>
 	<Sidebar.Content>
-		<NavMain items={sideBarData.navMain} />
-		<NavProjects projects={sideBarData.projects} />
+		<NavMain items={navMain} />
+		<NavProjects {projects} />
 	</Sidebar.Content>
 	<Sidebar.Footer>
-		<NavUser user={sideBarData.user} />
+		<NavUser {user} />
 	</Sidebar.Footer>
 	<Sidebar.Rail />
 </Sidebar.Root>
-
-
