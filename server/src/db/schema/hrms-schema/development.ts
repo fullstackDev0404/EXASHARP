@@ -105,5 +105,3 @@ export const exitClearance = pgTable(
     index("exit_clearance_department_idx").on(t.department),
   ],
 );
-
-
