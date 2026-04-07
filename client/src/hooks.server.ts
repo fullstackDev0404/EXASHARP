@@ -1,32 +1,23 @@
-// src/hooks.server.ts
 import { redirect, type Handle } from '@sveltejs/kit';
+
+const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 
 export const handle: Handle = async ({ event, resolve }) => {
   try {
-    // 1. Check the backend for the current user
-    const res = await fetch('http://localhost:3000/api/me', {
+    const res = await fetch(`${API_URL}/api/me`, {
       headers: {
         cookie: event.request.headers.get('cookie') ?? '',
       },
     });
 
-    if (res.ok) {
-      event.locals.user = await res.json();
-    } else {
-      event.locals.user = null;
-    }
-  } catch (e) {
-    console.error('hooks fetch error:', e);
+    event.locals.user = res.ok ? (await res.json()).user : null;
+  } catch {
     event.locals.user = null;
   }
 
-  // 2. Protection Logic (Moved inside the handle function)
-  const isDashboardRoute = event.url.pathname.startsWith('/dashboard');
-
-  if (isDashboardRoute && !event.locals.user) {
+  if (event.url.pathname.startsWith('/dashboard') && !event.locals.user) {
     throw redirect(303, '/login');
   }
 
-  // 3. Complete the request
   return resolve(event);
 };

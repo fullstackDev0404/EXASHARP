@@ -12,10 +12,6 @@ import {
   department,
   position,
 } from "./db/schema/hrms-schema";
-import {
-  employeeRelations,
-  roleRelations,
-} from "./db/schema/hrms-schema/table-relations";
 
 const app = new Elysia()
   .use(openapi())
@@ -157,8 +153,8 @@ const app = new Elysia()
           idNo: "N/A",
           positionId: defaultPosition[0].id,
           departmentId: defaultDepartment[0].id,
-          joiningDate: new Date(),
-          dateOfBirth: new Date("1990-01-01"),
+          joiningDate: new Date().toISOString().split('T')[0],
+          dateOfBirth: "1990-01-01",
           nationality: "Bangladeshi",
           contactNo: phone || "N/A",
         })

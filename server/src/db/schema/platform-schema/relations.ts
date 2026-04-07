@@ -1,20 +1,12 @@
 import { relations } from "drizzle-orm";
 import { user } from "../auth-schema";
-import { company } from "./company";
+import { company } from "../hrms-schema/core";
 import { userProfile } from "./user-profile";
 import { subscription } from "./subscription";
 import { exaAdminInvite } from "./exa-admin-invite";
 
-export const companyRelations = relations(company, ({ one, many }) => ({
-  requestedByUser: one(user, { fields: [company.requestedBy], references: [user.id] }),
-  approvedByUser: one(user, { fields: [company.approvedBy], references: [user.id] }),
-  userProfiles: many(userProfile),
-  subscriptions: many(subscription),
-}));
-
 export const userProfileRelations = relations(userProfile, ({ one }) => ({
   user: one(user, { fields: [userProfile.userId], references: [user.id] }),
-  company: one(company, { fields: [userProfile.companyId], references: [company.id] }),
 }));
 
 export const subscriptionRelations = relations(subscription, ({ one }) => ({

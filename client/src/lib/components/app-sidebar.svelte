@@ -27,6 +27,8 @@
 		avatar: "/avatars/shadcn.jpg"
 	});
 
+	console.log("-----------------------------", page);
+
 	const companies = $derived(page.data.companies || []);
 	const currentCompany = $derived(page.data.currentCompany);
 

@@ -26,7 +26,7 @@
 	const links = $derived(isDashboard ? dashboardLinks : authLinks);
 
 	const logout = async () => {
-		await fetch('http://localhost:3000/api/auth/sign-out', {
+		await fetch(`${import.meta.env.VITE_API_URL ?? 'http://localhost:3000'}/api/auth/sign-out`, {
 			method: 'POST',
 			credentials: 'include',
 			headers: { 'Origin': 'http://localhost:5173' }

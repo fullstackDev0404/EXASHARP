@@ -84,7 +84,7 @@
 				return;
 			}
 
-			const companyRes = await fetch('http://localhost:3000/api/company', {
+			const companyRes = await fetch(`${import.meta.env.VITE_API_URL ?? 'http://localhost:3000'}/api/company`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				credentials: 'include',

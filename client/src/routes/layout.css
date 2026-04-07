@@ -121,7 +121,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    overflow-y: hidden;
     background-image: url('/auth-bg.png');
     background-size: cover;
     background-attachment: fixed;

@@ -1,12 +1,8 @@
 import { createAuthClient } from "better-auth/svelte";
 
 export const authClient = createAuthClient({
-    baseURL: "http://localhost:3000", // Your Elysia URL
-    trustedOrigins: [
-        "http://localhost:5173",                // Your SvelteKit dev server
-        "http://localhost:3000",                // Optional: backend itself
-    ],
+    baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:3000',
     fetchOptions: {
-        credentials: "include",                 // Important so cookies are sent
+        credentials: "include",
     },
 });
