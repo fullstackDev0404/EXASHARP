@@ -4,15 +4,47 @@
 
 import { relations } from "drizzle-orm";
 import { company, permission, role, rolePermission, userRole } from "./core";
-import { address, education, emergencyContact, employee, experience, document, positionHistory, salaryHistory, contract } from "./employee";
-import { training, trainingParticipant, resignation, exitClearance } from "./development";
-import { shift, leaveType, attendance, leave, leaveBalance, employeeShift } from "./attendance";
+import {
+  address,
+  education,
+  emergencyContact,
+  employee,
+  experience,
+  document,
+  positionHistory,
+  salaryHistory,
+  contract,
+} from "./employee";
+import {
+  training,
+  trainingParticipant,
+  resignation,
+  exitClearance,
+} from "./development";
+import {
+  shift,
+  leaveType,
+  attendance,
+  leave,
+  leaveBalance,
+  employeeShift,
+} from "./attendance";
 import { department, position } from "./organization";
-import { allowanceType, deductionType, bankInfo, payroll, salaryStructure, employeeAllowance, employeeDeduction, payrollItem } from "./payroll";
+import {
+  allowanceType,
+  deductionType,
+  bankInfo,
+  payroll,
+  salaryStructure,
+  employeeAllowance,
+  employeeDeduction,
+  payrollItem,
+} from "./payroll";
 import { performanceReview, kpi, employeeKpi } from "./performance";
 import { notification } from "./system";
 import { jobPost, applicant, interview } from "./recruitment";
 import { asset } from "./assets";
+import { user } from "../auth-schema";
 
 export const companyRelations = relations(company, ({ many }) => ({
   employees: many(employee),
@@ -30,6 +62,10 @@ export const companyRelations = relations(company, ({ many }) => ({
 }));
 
 export const employeeRelations = relations(employee, ({ one, many }) => ({
+  user: one(user, {
+    fields: [employee.userId],
+    references: [user.id],
+  }),
   company: one(company, {
     fields: [employee.companyId],
     references: [company.id],
@@ -90,8 +126,12 @@ export const employeeRelations = relations(employee, ({ one, many }) => ({
 
   // Fix these (relationName mismatch)
   // leaves: many(leave),               // ← remove relationName or match it
-  performanceReviewsAsReviewee: many(performanceReview, { relationName: "reviewee" }),
-  performanceReviewsAsReviewer: many(performanceReview, { relationName: "reviewer" }),
+  performanceReviewsAsReviewee: many(performanceReview, {
+    relationName: "reviewee",
+  }),
+  performanceReviewsAsReviewer: many(performanceReview, {
+    relationName: "reviewer",
+  }),
 }));
 
 export const departmentRelations = relations(department, ({ one, many }) => ({
@@ -516,6 +556,4 @@ export const employeeKpiRelations = relations(employeeKpi, ({ one }) => ({
   }),
 }));
 
-
 // Add more relations as needed...
-

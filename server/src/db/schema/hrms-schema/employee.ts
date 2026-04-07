@@ -1,11 +1,29 @@
-
-
-import { genderEnum, bloodGroupEnum, maritalStatusEnum, documentTypeEnum, addressTypeEnum, contractTypeEnum } from "./enums";
+import {
+  genderEnum,
+  bloodGroupEnum,
+  maritalStatusEnum,
+  documentTypeEnum,
+  addressTypeEnum,
+  contractTypeEnum,
+} from "./enums";
 
 import { company } from "./core";
 
-import { boolean, date, decimal, index, integer, json, pgTable, serial, text, timestamp, unique } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  date,
+  decimal,
+  index,
+  integer,
+  json,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  unique,
+} from "drizzle-orm/pg-core";
 import { department, position } from "./organization";
+import { user } from "../auth-schema";
 
 // ============================================
 // EMPLOYEE (Complete with all fields)
@@ -15,6 +33,9 @@ export const employee = pgTable(
   "employee",
   {
     id: serial("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
     companyId: integer("company_id")
       .notNull()
       .references(() => company.id, { onDelete: "cascade" }),
@@ -53,15 +74,16 @@ export const employee = pgTable(
     unique("employee_company_code").on(t.companyId, t.employeeCode),
     unique("employee_company_email").on(t.companyId, t.email),
     unique("employee_company_id_no").on(t.companyId, t.idNo),
+    unique("employee_user").on(t.userId),
     index("employee_email_idx").on(t.email),
     index("employee_code_idx").on(t.employeeCode),
     index("employee_position_idx").on(t.positionId),
     index("employee_department_idx").on(t.departmentId),
     index("employee_manager_idx").on(t.reportingManagerId),
     index("employee_company_idx").on(t.companyId),
+    index("employee_user_idx").on(t.userId),
   ],
 );
-
 
 // ============================================
 // EXPERIENCE
@@ -201,7 +223,6 @@ export const emergencyContact = pgTable(
   (t) => [index("emergency_employee_idx").on(t.employeeId)],
 );
 
-
 // ============================================
 // HISTORY TABLES
 // ============================================
@@ -247,9 +268,6 @@ export const salaryHistory = pgTable(
   ],
 );
 
-
-
-
 // ============================================
 // CONTRACT MANAGEMENT
 // ============================================
@@ -279,4 +297,3 @@ export const contract = pgTable(
     index("contract_dates_idx").on(t.startDate, t.endDate),
   ],
 );
-
