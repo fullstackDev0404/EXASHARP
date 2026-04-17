@@ -121,10 +121,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: url('/auth-bg.png');
-    background-size: cover;
-    background-attachment: fixed;
-    background-color: #1a0f08;
   }
   html {
     @apply font-sans;

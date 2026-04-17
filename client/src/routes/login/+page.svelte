@@ -1,6 +1,4 @@
 <script lang="ts">
-	import AuthCard from '$lib/components/auth/auth-card.svelte';
-	import { Input } from '$lib/components/ui/input';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { authClient } from '$lib/auth-client';
 
@@ -35,10 +33,7 @@
 		loading = true;
 		serverError = '';
 		try {
-			const { error } = await authClient.signIn.email({
-				email,
-				password
-			});
+			const { error } = await authClient.signIn.email({ email, password });
 			if (error) {
 				serverError = error.message || 'Invalid credentials.';
 			} else {
@@ -52,44 +47,106 @@
 	};
 </script>
 
-<div class="relative min-h-screen w-full overflow-hidden bg-[#0a0a0f]">
-	<img src="/auth-bg.png" alt="" class="absolute inset-0 h-full w-full object-cover opacity-60" aria-hidden="true" />
+<svelte:head>
+	<title>Sign In — EXASHARP</title>
+</svelte:head>
 
-	<div class="relative z-10 flex min-h-[calc(100vh-80px)] items-center justify-center px-4">
-		<AuthCard title="Sign In">
+<div class="min-h-screen flex relative overflow-hidden">
+	<!-- Full page background -->
+	<img src="/auth-bg.png" alt="" class="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
+	<div class="absolute inset-0" style="background: rgba(26,39,68,0.75);"></div>
+
+	<!-- Left panel: branding -->
+	<div class="hidden lg:flex lg:w-1/2 relative z-10 flex-col justify-between p-10">
+		<div class="flex items-center gap-3">
+			<img src="/logo.png" alt="EXASHARP" class="h-10 w-auto" />
+		</div>
+		<!-- Bottom tagline -->
+		<div>
+			<h2 class="text-white text-3xl font-bold leading-snug mb-3">
+				Manage your workforce<br />smarter, faster.
+			</h2>
+			<p class="text-blue-200 text-sm leading-relaxed max-w-sm">
+				EXASHARP HRMS gives you complete control over HR, payroll, attendance, and performance — all in one platform.
+			</p>
+		</div>
+	</div>
+
+	<!-- Right panel: form -->
+	<div class="flex-1 relative z-10 flex items-center justify-center px-6 py-12">
+		<div class="w-full max-w-md bg-white rounded-2xl shadow-2xl px-8 py-10">
+
+			<!-- Mobile logo -->
+			<div class="flex items-center gap-2 mb-8 lg:hidden">
+				<img src="/logo.png" alt="EXASHARP" class="h-8 w-auto" />
+				<span class="font-bold text-gray-800">EXASHARP</span>
+			</div>
+
+			<h1 class="text-3xl font-bold text-gray-900 mb-2">Sign In</h1>
+			<p class="text-gray-500 text-sm mb-8">Sign in to your EXASHARP account</p>
+
 			{#if serverError}
-				<p class="mb-4 rounded-lg bg-red-500/20 px-4 py-2 text-center text-sm text-red-400">{serverError}</p>
+				<div class="mb-5 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-600">
+					{serverError}
+				</div>
 			{/if}
 
-			<form onsubmit={(e) => { e.preventDefault(); login(); }} class="space-y-4">
-				<div class="space-y-1">
-					<Input type="email" placeholder="Email Address" bind:value={email} icon="email" error={!!emailError} />
-					{#if emailError}<p class="text-xs text-red-400 pl-1">{emailError}</p>{/if}
+			<form onsubmit={(e) => { e.preventDefault(); login(); }} class="space-y-5">
+
+				<!-- Email -->
+				<div>
+					<label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">Email Address</label>
+					<input
+						id="email"
+						type="email"
+						placeholder="Enter your email"
+						bind:value={email}
+						class="w-full rounded-lg border px-4 py-3 text-sm text-gray-800 placeholder-gray-400 outline-none transition-colors
+							{emailError ? 'border-red-400 bg-red-50 focus:border-red-400' : 'border-gray-300 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100'}"
+					/>
+					{#if emailError}<p class="mt-1 text-xs text-red-500">{emailError}</p>{/if}
 				</div>
 
-				<div class="space-y-1">
-					<Input type="password" placeholder="Password" bind:value={password} icon="password" error={!!passwordError} />
-					{#if passwordError}<p class="text-xs text-red-400 pl-1">{passwordError}</p>{/if}
+				<!-- Password -->
+				<div>
+					<label for="password" class="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
+					<input
+						id="password"
+						type="password"
+						placeholder="Enter your password"
+						bind:value={password}
+						onkeydown={(e: KeyboardEvent) => e.key === 'Enter' && login()}
+						class="w-full rounded-lg border px-4 py-3 text-sm text-gray-800 placeholder-gray-400 outline-none transition-colors
+							{passwordError ? 'border-red-400 bg-red-50 focus:border-red-400' : 'border-gray-300 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100'}"
+					/>
+					{#if passwordError}<p class="mt-1 text-xs text-red-500">{passwordError}</p>{/if}
 				</div>
 
+				<!-- Remember + Forgot -->
 				<div class="flex items-center justify-between">
 					<Checkbox bind:checked={rememberMe} label="Remember Me" />
-					<a href="/forgot-password" class="text-sm text-gray-400 hover:text-white transition-colors">Forgot Password?</a>
+					<a href="/forgot-password" class="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors">
+						Forgot Password?
+					</a>
 				</div>
 
+				<!-- Submit -->
 				<button
 					type="submit"
 					disabled={loading}
-					class="w-full rounded-lg bg-yellow-400 py-3 text-base font-bold text-black hover:bg-yellow-300 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+					class="w-full rounded-lg py-3 text-sm font-semibold text-white transition-all disabled:opacity-60 disabled:cursor-not-allowed hover:opacity-90"
+					style="background: linear-gradient(135deg, #3b6fd4, #2855b0);"
 				>
 					{loading ? 'Signing in...' : 'Sign In'}
 				</button>
 
-				<p class="text-center text-sm text-gray-400">
+				<p class="text-center text-sm text-gray-500">
 					Don't have an account?
-					<a href="/register" class="font-semibold text-yellow-400 hover:text-yellow-300 transition-colors">Sign Up</a>
+					<a href="/register" class="font-bold text-blue-600 hover:text-blue-700 transition-colors">Sign Up</a>
 				</p>
 			</form>
-		</AuthCard>
+
+			<p class="mt-10 text-center text-xs text-gray-400">© 2026 EXASHARP. All rights reserved.</p>
+		</div>
 	</div>
 </div>

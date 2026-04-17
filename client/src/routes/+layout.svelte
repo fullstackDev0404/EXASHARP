@@ -7,6 +7,7 @@
 	let { children, data } = $props();
 
 	const isDashboard = $derived(page.url.pathname.startsWith('/dashboard'));
+	const isAuthPage = $derived(page.url.pathname === '/login' || page.url.pathname === '/register');
 </script>
 
 <svelte:head>
@@ -14,7 +15,7 @@
 	<title>Enterprise Resource Planning (ERP) - EXASHARP</title>
 </svelte:head>
 
-{#if !isDashboard}
+{#if !isDashboard && !isAuthPage}
 	<Toolbar user={data.user} />
 {/if}
 
