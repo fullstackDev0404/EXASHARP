@@ -17,7 +17,7 @@ const app = new Elysia()
   .use(openapi())
   .use(
     cors({
-      origin: ["http://localhost:5173", "http://localhost:3000"],
+      origin: ["http://localhost:5173", "http://localhost:3005"],
       credentials: true,
       allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -203,6 +203,6 @@ const app = new Elysia()
     }
   })
   .all("/api/auth/*", (ctx) => auth.handler(ctx.request))
-  .listen(3000);
+  .listen(3005);
 
 export type App = typeof app;
